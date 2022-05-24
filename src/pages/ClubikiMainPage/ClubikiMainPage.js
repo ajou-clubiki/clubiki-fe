@@ -1,7 +1,7 @@
 import ClubikiMainBoard from "./ClubikiMainBoard";
 import ClubikiSubBoard from "./ClubikiSubBoard";
 import CreateMainBoardBtn from "../CreateMainBoardPage/CreateMainBoardBtn";
-import RemoveSubBoardBtn from "./RemoveSubBoardBtn";
+import ConfigSubBoardBtn from "./ConfigSubBoardBtn";
 import classes from "./ClubikiMainPage.module.css";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
@@ -67,7 +67,9 @@ const ClubikiMainPage = () => {
         <Link to="create-board" state={{ clubId: id }}>
           <CreateMainBoardBtn />
         </Link>
-        <RemoveSubBoardBtn />
+        <Link to="config-subboard">
+          <ConfigSubBoardBtn />
+        </Link>
       </div>
       <div className={classes["page__layout"]}>
         <ClubikiMainBoard clubId={id} />

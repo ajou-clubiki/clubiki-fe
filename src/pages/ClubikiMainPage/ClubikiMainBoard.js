@@ -3,7 +3,7 @@ import { getDataBy2 } from "../../components/http-request";
 import classes from "./ClubikiMainBoard.module.css";
 import MainBoardList from "./MainBoardList";
 
-const ClubikiMainBoard = ({ clubId }) => {
+const ClubikiMainBoard = ({ clubBoardId, clubId, markdown }) => {
   const [clubList, setClubList] = useState(null);
 
   useEffect(() => {
