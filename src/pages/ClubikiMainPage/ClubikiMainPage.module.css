@@ -1,0 +1,7 @@
+.page__layout {
+  width: 100%;
+  height: 85vh;
+
+  display: flex;
+  align-items: stretch;
+}

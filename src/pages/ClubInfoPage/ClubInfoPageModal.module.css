@@ -28,3 +28,22 @@
   align-items: center;
   gap: 10%;
 }
+
+.closeBtn {
+  size: 70;
+  position: absolute;
+  top: 17%;
+  right: 32%;
+  opacity: 50%;
+}
+
+.closeBtn:hover {
+  opacity: 90%;
+  cursor: pointer;
+  color: brown;
+}
+
+.closeBtn:active {
+  opacity: 100%;
+  color: rgb(121, 28, 28);
+}

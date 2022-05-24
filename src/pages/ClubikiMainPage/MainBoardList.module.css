@@ -1,0 +1,33 @@
+.listStyle {
+  list-style: none;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+.listStyle li {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.listStyle li:hover {
+  cursor: pointer;
+  background-color: rgba(135, 207, 235, 0.5);
+  color: blue;
+}
+
+.locker {
+  padding-bottom: 5px;
+}
+
+.locker:hover {
+  cursor: pointer;
+  color: brown;
+}
+
+.locker:active {
+  cursor: pointer;
+  color: rgb(121, 31, 31);
+}
