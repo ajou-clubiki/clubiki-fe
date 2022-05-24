@@ -11,19 +11,23 @@ import { putDataByFirebase } from "../../components/http-request";
 
 // /wikiBoard/article/{clubBoardId}
 
-const ToastUIEditor = ({ id, clubId, data }) => {
-  const prevRef = useRef();
+const ToastUIEditor = ({ id, clubId, data, initialValue }) => {
   const editorRef = useRef();
+  const isConfig = initialValue ? true : false;
 
-  useEffect(() => {
-    prevRef.current = data;
-  }, []);
+  const selectDataDependsOnConfig = () => {
+    const dataForm = editorRef.current.getInstance().getMarkdown();
+
+    console.log(dataForm);
+
+    if (isConfig) return dataForm;
+    if (!isConfig) return `${data ? data : ""}\n\n${dataForm}`;
+  };
 
   const uploadSubBoardDataHandler = async () => {
-    const dataForm = editorRef.current.getInstance().getMarkdown();
     await putDataByFirebase(
       `wikiBoard/article/${id}`,
-      `${data ? data : ""}\n\n${dataForm}`
+      selectDataDependsOnConfig()
     );
   };
 
@@ -31,7 +35,7 @@ const ToastUIEditor = ({ id, clubId, data }) => {
     <>
       <Editor
         plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}
-        initialValue="여기에 게시물을 작성해 주세요!"
+        initialValue={initialValue || "게시물을 작성해주세요"}
         height="600px"
         width="1000px"
         ref={editorRef}

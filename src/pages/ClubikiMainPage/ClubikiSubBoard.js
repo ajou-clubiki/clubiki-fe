@@ -7,7 +7,6 @@ const ClubikiSubBoard = ({ clubBoardId, clubId, markdown }) => {
 
   return (
     <div className={classes["subBoard"]}>
-      <h3>게시판 제목</h3>
       {!!clubBoardId && (
         <>
           <ReactMarkdown>{markdownData}</ReactMarkdown>
