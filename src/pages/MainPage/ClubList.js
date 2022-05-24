@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getData } from "../../components/http-request";
+import { getDataBy1 } from "../../components/http-request";
 import ClubItem from "./ClubItem";
 import classes from "./ClubList.module.css";
 
@@ -9,17 +9,15 @@ const ClubList = () => {
 
   useEffect(() => {
     const getClubListDataFromServer = async () => {
-      const response = await getData("clublist");
+      const response = await getDataBy1("list");
       const responseData = await response.data;
-      setClubList(responseData);
+      setClubList(responseData.clubInfos);
     };
 
     setIsLoading(true);
     getClubListDataFromServer();
     setIsLoading(false);
   }, []);
-
-  console.log(clubList);
 
   return (
     <>

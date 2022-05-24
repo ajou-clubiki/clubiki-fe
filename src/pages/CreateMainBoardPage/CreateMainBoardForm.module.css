@@ -1,0 +1,38 @@
+.form__layout {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 80%;
+  gap: 20px;
+}
+
+.form__small-layout {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex: 1;
+}
+
+.form__small-layout label {
+  font-size: 20px;
+}
+
+.form__small-layout input {
+  width: 70%;
+  height: 30px;
+  border: 1px solid rgb(175, 175, 175);
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.form__small-layout textarea {
+  width: 70%;
+  height: 200px;
+  resize: none;
+}
+
+.form__small-layout input[type="checkbox"] {
+  width: 3%;
+}

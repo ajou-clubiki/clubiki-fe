@@ -1,7 +1,7 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import ClubInfoPageModal from "../../ClubInfoPage/ClubInfoPageModal";
 import ClubInfoDetailContents from "../ClubInfoDetailContents";
-import ClubInfoBtn from "../ClubInfoBtn";
+import Button from "../../../components/Button";
 import { BrowserRouter } from "react-router-dom";
 import "@testing-library/jest-dom";
 import "@testing-library/react";
@@ -34,15 +34,13 @@ describe("modal should render a data", () => {
   });
 
   it("about detail", () => {
-    render(<ClubInfoDetailContents cp="나회장" vcp="나부회장" loc="우리 집" />);
+    render(<ClubInfoDetailContents intro="안녕하세요" />);
 
-    expect(screen.getByText("회장: 나회장")).toBeInTheDocument();
-    expect(screen.getByText("부회장: 나부회장")).toBeInTheDocument();
-    expect(screen.getByText("위치: 우리 집")).toBeInTheDocument();
+    expect(screen.getByText("안녕하세요")).toBeInTheDocument();
   });
 
   it("about button", () => {
-    render(<ClubInfoBtn btnName={"버튼입니다"} />);
+    render(<Button btnName={"버튼입니다"} />);
     const btn = screen.getByRole("button", {
       name: "버튼입니다",
     });

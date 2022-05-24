@@ -1,6 +1,10 @@
 import { Route, Routes } from "react-router-dom";
 import MainPage from "./pages/MainPage/MainPage";
 import ClubikiMainPage from "./pages/ClubikiMainPage/ClubikiMainPage";
+import CreateMainBoardPage from "./pages/CreateMainBoardPage/CreateMainBoardPage";
+import CreateSubBoardPage from "./pages/CreateSubBoardPage/CreateSubBoardPage";
+import ClubMemberListPage from "./pages/ClubMemberListPage/ClubMemberListPage";
+
 import "./general.css";
 import "./App.css";
 
@@ -10,7 +14,10 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/wiki" element={<ClubikiMainPage />} />
+        <Route path="wiki/create-board" element={<CreateMainBoardPage />} />
+        <Route path="wiki/create-subboard" element={<CreateSubBoardPage />} />
         <Route path="/join" element={<ClubikiMainPage />} />
+        <Route path="/members" element={<ClubMemberListPage />} />
       </Routes>
     </>
   );

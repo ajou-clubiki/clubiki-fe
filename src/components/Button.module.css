@@ -1,11 +1,11 @@
 .btn {
-  margin-top: 50px;
   background-color: cornflowerblue;
   color: whitesmoke;
   border: none;
   border-radius: 10px;
-  width: 200px;
+  width: 150px;
   height: 50px;
+  font-size: 20px;
 }
 
 .btn:hover {
