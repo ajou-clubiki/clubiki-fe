@@ -4,3 +4,17 @@
   width: 100%;
   height: 80vh;
 }
+
+.locker {
+  width: 30px;
+  height: auto;
+}
+
+.locker:hover {
+  color: brown;
+  cursor: pointer;
+}
+
+.locker:active {
+  color: rgb(109, 27, 27);
+}

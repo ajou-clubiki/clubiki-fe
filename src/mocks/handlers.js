@@ -30,10 +30,6 @@ export const handlers = [
     );
   }),
 
-  rest.post(`${BASE_URL_2}/wikiBoard/2`, (req, res, ctx) => {
-    return res("정상적으로 작동되었습니다!");
-  }),
-
   rest.get(`${BASE_URL_2}/wikiBoard/2`, (req, res, ctx) => {
     return res(
       ctx.json({
@@ -42,10 +38,12 @@ export const handlers = [
           {
             wikiBoardId: 4,
             wikiName: "활동",
+            isLock: true,
           },
           {
             wikiBoardId: 5,
             wikiName: "MT",
+            isLock: false,
           },
         ],
       })
@@ -126,6 +124,20 @@ export const handlers = [
             status: "가입 거절",
           },
         ],
+      })
+    );
+  }),
+
+  rest.post(`${BASE_URL_2}/wikiBoard/2`, (req, res, ctx) => {
+    return res("정상적으로 작동되었습니다!");
+  }),
+
+  rest.post(`${BASE_URL_2}/wikiBoard/lock/:wikiBoardId`, (req, res, ctx) => {
+    const { isLock } = req.body;
+
+    return res(
+      ctx.json({
+        isLock,
       })
     );
   }),
