@@ -10,6 +10,8 @@ const ClubikiMainBoard = ({ clubBoardId, clubId, markdown }) => {
     const getClubListFromServer = async () => {
       const response = await getDataBy2(`wikiBoard/${clubId}`);
       const responseData = await response.data.data;
+
+      console.log(response);
       setClubList(responseData);
     };
 

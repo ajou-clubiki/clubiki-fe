@@ -1,10 +1,14 @@
 import classes from "./CreateMainBoardForm.module.css";
 import CreateMainBoardBtn from "./CreateMainBoardBtn";
-import { putDataByFirebase } from "../../components/http-request";
+import { postDataBy2 } from "../../components/http-request";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const CreateMainBoardForm = ({ clubId }) => {
+  const [wikiNameTouched, setWikiNameTouched] = useState(false);
+  const [wikiNameIsValid, setWikiNameIsValid] = useState(false);
+  const [categoryTouched, setCategoryTouched] = useState(false);
+  const [categoryIsValid, setCategoryIsValid] = useState(false);
   const [dataForm, setDataForm] = useState({
     wikiName: "",
     wikiIntro: "",
@@ -13,11 +17,17 @@ const CreateMainBoardForm = ({ clubId }) => {
     isLock: false,
   });
 
+  const wikiNameValidationError = !wikiNameIsValid && wikiNameTouched;
+  const categoryValidationError = !categoryIsValid && categoryTouched;
+  const isDisabled = !wikiNameIsValid || !categoryIsValid;
+
   const submitDataFormHandler = (e) => {
     e.preventDefault();
   };
 
   const changeWikiNameHandler = (e) => {
+    if (e.target.value.trim() !== "") setWikiNameIsValid(true);
+    if (e.target.value.trim() === "") setWikiNameIsValid(false);
     setDataForm({ ...dataForm, wikiName: e.target.value });
   };
 
@@ -30,6 +40,8 @@ const CreateMainBoardForm = ({ clubId }) => {
   };
 
   const changeBoardCategoryHandler = (e) => {
+    if (e.target.value.trim() !== "") setCategoryIsValid(true);
+    if (e.target.value.trim() === "") setCategoryIsValid(false);
     setDataForm({ ...dataForm, boardCategory: e.target.value });
   };
 
@@ -37,8 +49,25 @@ const CreateMainBoardForm = ({ clubId }) => {
     setDataForm({ ...dataForm, cpAnnouncement: e.target.value });
   };
 
-  const sendFormDataToServer = () => {
-    putDataByFirebase(`/wikiBoard/${clubId}`, dataForm);
+  const sendFormDataToServer = async () => {
+    const response = await postDataBy2(`wikiBoard/${clubId}`, dataForm);
+    console.log(response);
+  };
+
+  const wikiNameBlurHandler = () => {
+    setWikiNameTouched(true);
+
+    if (dataForm.wikiName.trim() === "") {
+      setWikiNameIsValid(false);
+    }
+  };
+
+  const boardCategoryBlurHandler = () => {
+    setCategoryTouched(true);
+
+    if (dataForm.boardCategory.trim() === "") {
+      setCategoryIsValid(false);
+    }
   };
 
   return (
@@ -50,8 +79,19 @@ const CreateMainBoardForm = ({ clubId }) => {
           type="text"
           value={dataForm.wikiName}
           onChange={changeWikiNameHandler}
+          onBlur={wikiNameBlurHandler}
+          className={
+            classes[
+              `${wikiNameValidationError ? "BoardTitleValidationError" : ""}`
+            ]
+          }
         />
       </div>
+      {wikiNameValidationError && (
+        <p className={classes.InvalidWikiNameMessage}>
+          게시판 제목을 입력해 주세요.
+        </p>
+      )}
       <div className={classes["form__small-layout"]}>
         <label htmlFor="board-intro">게시판 소개:</label>
         <textarea
@@ -76,6 +116,10 @@ const CreateMainBoardForm = ({ clubId }) => {
           id="boardCategory"
           data-testid="select-option"
           onChange={changeBoardCategoryHandler}
+          onBlur={boardCategoryBlurHandler}
+          className={`${
+            categoryValidationError ? "CategoryValidationError" : ""
+          }`}
         >
           <option value="">---게시판 종류---</option>
           <option value="event">동아리행사</option>
@@ -88,6 +132,9 @@ const CreateMainBoardForm = ({ clubId }) => {
           <option value="meeting">모임</option>
         </select>
       </div>
+      {categoryValidationError && (
+        <p className={classes.InvalidCategory}>카테고리를 넣어주세요</p>
+      )}
       <div className={classes["form__small-layout"]}>
         <label htmlFor="cp-announce">회장의 말씀:</label>
         <input
@@ -99,7 +146,7 @@ const CreateMainBoardForm = ({ clubId }) => {
       </div>
       <div style={{ marginTop: "30px" }} type="submit">
         <Link to="/wiki" onClick={sendFormDataToServer} state={{ clubId }}>
-          <CreateMainBoardBtn />
+          <CreateMainBoardBtn disabled={isDisabled} />
         </Link>
       </div>
     </form>

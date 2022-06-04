@@ -9,10 +9,50 @@
 }
 
 .btn:hover {
-  background-color: rgb(22, 80, 188);
+  background-color: #1650bc;
   cursor: pointer;
 }
 
 .btn:active {
   background-color: rgb(4, 52, 143);
+}
+
+.btn:disabled {
+  background-color: gray;
+  cursor: default;
+}
+
+.SmallBtn {
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 2px;
+}
+
+.SmallBtn--blue {
+  background-color: #6495ec;
+}
+
+.SmallBtn--blue:hover {
+  background-color: #1750bc;
+  color: aliceblue;
+  cursor: pointer;
+}
+
+.SmallBtn--blue:active {
+  background-color: #11419a;
+}
+
+.SmallBtn--orange {
+  background-color: orange;
+}
+
+.SmallBtn--orange:hover {
+  background-color: rgb(206, 134, 0);
+  color: aliceblue;
+  cursor: pointer;
+}
+
+.SmallBtn--orange:active {
+  background-color: rgb(171, 111, 1);
 }

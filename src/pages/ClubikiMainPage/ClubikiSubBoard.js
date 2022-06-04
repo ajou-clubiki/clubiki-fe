@@ -30,19 +30,29 @@ const ClubikiSubBoard = ({ clubBoardId, clubId, markdown }) => {
     <div className={classes["subBoard"]}>
       {!!clubBoardId && (
         <>
-          {!lockSelector && (
-            <AiFillUnlock
-              className={classes.locker}
-              onClick={() => setLockerHandler(true)}
-            />
-          )}
-          {!!lockSelector && (
-            <AiFillLock
-              className={classes.locker}
-              onClick={() => setLockerHandler(false)}
-            />
-          )}
-          <ReactMarkdown>{markdownData}</ReactMarkdown>
+          <div style={{ marginLeft: "60px" }}>
+            {!lockSelector && (
+              <AiFillUnlock
+                className={classes.locker}
+                onClick={() => setLockerHandler(true)}
+              />
+            )}
+            {!!lockSelector && (
+              <AiFillLock
+                className={classes.locker}
+                onClick={() => setLockerHandler(false)}
+              />
+            )}
+            <ReactMarkdown
+              components={{
+                img: ({ node, ...props }) => (
+                  <img style={{ maxWidth: "80%" }} {...props} alt="" />
+                ),
+              }}
+            >
+              {markdownData}
+            </ReactMarkdown>
+          </div>
           <SubBoardBtn
             clubBoardId={clubBoardId}
             clubId={clubId}
