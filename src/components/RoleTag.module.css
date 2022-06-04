@@ -1,0 +1,15 @@
+.RoleTag {
+  font-size: 12px;
+  padding: 5px;
+  border-radius: 100px;
+}
+
+.RoleTag--cp {
+  background-color: #3df2c2;
+  color: #024abe;
+}
+
+.RoleTag--normal {
+  background-color: #3d82f2;
+  color: aliceblue;
+}

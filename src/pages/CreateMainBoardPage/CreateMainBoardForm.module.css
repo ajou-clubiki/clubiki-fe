@@ -36,3 +36,20 @@
 .form__small-layout input[type="checkbox"] {
   width: 3%;
 }
+
+.BoardTitleValidationError,
+.CategoryValidationError {
+  background-color: orange;
+}
+
+.InvalidWikiNameMessage,
+.Invalid {
+  margin-top: -15px;
+  color: red;
+}
+
+.InvalidCategory {
+  margin-top: -15px;
+  margin-right: -365px;
+  color: red;
+}

@@ -5,11 +5,9 @@ import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import classes from "./ToastUIEditor.module.css";
 import { Editor } from "@toast-ui/react-editor";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import CreateSubBoardBtn from "./CreateSubBoardBtn";
-import { putDataByFirebase } from "../../components/http-request";
-
-// /wikiBoard/article/{clubBoardId}
+import { postDataImg, putDataByFirebase } from "../../components/http-request";
 
 const ToastUIEditor = ({ id, clubId, data, initialValue }) => {
   const editorRef = useRef();
@@ -17,8 +15,6 @@ const ToastUIEditor = ({ id, clubId, data, initialValue }) => {
 
   const selectDataDependsOnConfig = () => {
     const dataForm = editorRef.current.getInstance().getMarkdown();
-
-    console.log(dataForm);
 
     if (isConfig) return dataForm;
     if (!isConfig) return `${data ? data : ""}\n\n${dataForm}`;
@@ -39,6 +35,17 @@ const ToastUIEditor = ({ id, clubId, data, initialValue }) => {
         height="600px"
         width="1000px"
         ref={editorRef}
+        hooks={{
+          addImageBlobHook: async (blob, callback) => {
+            const formData = new FormData();
+            formData.append("file", blob);
+
+            const responseData = await postDataImg("upload", formData);
+            const imgUrl = await responseData.data.url;
+
+            callback(imgUrl, "alt text");
+          },
+        }}
       />
       <div
         className={classes.CreateSubBoardBtn}

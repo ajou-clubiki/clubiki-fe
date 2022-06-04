@@ -1,7 +1,7 @@
 import { rest } from "msw";
-
-export const BASE_URL_1 = "http://3.37.201.213:8080/club";
 export const BASE_URL_2 = "http://3.37.201.213:8080";
+export const BASE_URL_1 = "http://3.37.201.213:8080/club";
+export const BASE_URL_UTIL = "http://3.37.201.213:8080/util";
 
 export const handlers = [
   rest.get(`${BASE_URL_1}/list`, (req, res, ctx) => {
@@ -112,16 +112,44 @@ export const handlers = [
             clubName: "알고알고",
             memberName: "서강준",
             status: "대기",
+            studentId: "201700001",
           },
           {
             clubName: "알고알고",
             memberName: "배수지",
             status: "대기",
+            studentId: "201700002",
           },
           {
             clubName: "알고알고",
             memberName: "우기",
             status: "가입 거절",
+            studentId: "201700003",
+          },
+        ],
+      })
+    );
+  }),
+
+  rest.get(`${BASE_URL_1}/2/memberList`, (req, res, ctx) => {
+    return res(
+      ctx.json({
+        message: "한개 동아리의 멤버를 조회했습니다.",
+        clubMemberInfos: [
+          {
+            clubName: "알고알고",
+            memberName: "서강준",
+            role: "회장",
+          },
+          {
+            clubName: "알고알고",
+            memberName: "배수지",
+            role: "일반 회원",
+          },
+          {
+            clubName: "알고알고",
+            memberName: "우기",
+            role: "일반 회원",
           },
         ],
       })
@@ -134,10 +162,42 @@ export const handlers = [
 
   rest.post(`${BASE_URL_2}/wikiBoard/lock/:wikiBoardId`, (req, res, ctx) => {
     const { isLock } = req.body;
-
     return res(
       ctx.json({
         isLock,
+      })
+    );
+  }),
+
+  rest.post(`${BASE_URL_UTIL}/:clubId/:memberId/accept`, (req, res, ctx) => {
+    const { clubId, memberId } = req.params;
+    return res(
+      ctx.json({
+        message: "특정 가입 신청을 수락합니다.",
+        clubId,
+        memberId,
+      })
+    );
+  }),
+
+  rest.post(`${BASE_URL_UTIL}/:clubId/:memberId/accept`, (req, res, ctx) => {
+    const { clubId, memberId } = req.params;
+    return res(
+      ctx.json({
+        message: "특정 가입 신청을 수락합니다.",
+        clubId,
+        memberId,
+      })
+    );
+  }),
+
+  rest.post(`${BASE_URL_UTIL}/:clubId/:memberId/reject`, (req, res, ctx) => {
+    const { clubId, memberId } = req.params;
+    return res(
+      ctx.json({
+        message: "특정 가입 신청을 거절합니다.",
+        clubId,
+        memberId,
       })
     );
   }),

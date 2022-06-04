@@ -6,7 +6,7 @@ import classes from "./ClubikiMainPage.module.css";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getDataByFirebase } from "../../components/http-request";
+import { getDataBy2 } from "../../components/http-request";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { clubIdActions } from "../../store/clubId-slice";
@@ -24,16 +24,15 @@ const ClubikiMainPage = () => {
 
   useEffect(() => {
     const getSubBoardListDataFromServer = async () => {
-      // if (wikiBoardId) {
-      //   const response = await getDataBy2(`wikiBoard/page/${wikiBoardId}`);
-      //   const responseData = await response.data;
-      //   console.log(responseData);
-      // }
+      if (wikiBoardId) {
+        const response = await getDataBy2(`wikiBoard/page/${wikiBoardId}`);
+        const responseData = await response.data;
+
+        console.log(responseData);
+      }
 
       if (wikiBoardId && !firstTime) {
-        const response = await getDataByFirebase(
-          `wikiBoard/article/${wikiBoardId}`
-        );
+        const response = await getDataBy2(`wikiBoard/article/${wikiBoardId}`);
 
         const responseData = await response?.data?.body;
         setWikiBoardData(responseData);
@@ -58,7 +57,7 @@ const ClubikiMainPage = () => {
         data: wikiBoardData,
       })
     );
-  }, [wikiBoardId, wikiBoardData, id, dispatch]);
+  }, [wikiBoardId, wikiBoardData, id, dispatch, firstTime]);
 
   return (
     <div style={{ margin: "10px" }}>
